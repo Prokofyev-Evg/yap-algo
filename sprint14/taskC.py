@@ -1,14 +1,13 @@
 import sys
 
 
-def is_substring(s1, s2):
-    if len(s1) == 0:
-        return True
-    if len(s2) == 0:
-        return len(s1) == 0
-    if s1[0] == s2[0]:
-        return is_substring(s1[1:], s2[1:])
-    return is_substring(s1, s2[1:])
+def is_substring(sub_str, str):
+    s, ss = 0, 0
+    while s < len(str):
+        if ss < len(sub_str) and str[s] == sub_str[ss]:
+            ss += 1
+        s += 1
+    return len(sub_str) == ss
 
 
 def main():
