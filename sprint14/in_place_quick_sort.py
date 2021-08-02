@@ -1,8 +1,12 @@
 import random
 import sys
-from collections import namedtuple
 
-Participant = namedtuple('Participant', ['name', 'points', 'falls'])
+
+class Participant:
+    def __init__(self, name, points, falls):
+        self.name = name
+        self.points = points
+        self.falls = falls
 
 
 def first_participant_is_higher(first, second):
@@ -15,16 +19,16 @@ def first_participant_is_higher(first, second):
         return first.points > second.points
 
 
-def in_place_quick_sort(arr, left, right, comparator=lambda x, y: x <= y):
+def in_place_quick_sort(arr, left, right, comparator):
     if left >= right - 1:
         return
-    pivot = random.choice(arr[left:right])
-    index = partition(arr, pivot, left, right, comparator)
+    index = partition(arr, left, right, comparator)
     in_place_quick_sort(arr, left, index, comparator)
     in_place_quick_sort(arr, index, right, comparator)
 
 
-def partition(arr, pivot, left_index, right_index, comparator=lambda x, y: x <= y):
+def partition(arr, left_index, right_index, comparator):
+    pivot = random.choice(arr[left_index:right_index])
     while left_index < right_index:
         if comparator(arr[left_index], pivot):
             left_index += 1
