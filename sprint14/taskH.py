@@ -2,15 +2,7 @@ import sys
 
 
 def is_first_number_bigger(number_1, number_2):
-    for index in range(max(len(number_1), len(number_1))):
-        if index >= len(number_1):
-            return False
-        if index >= len(number_2):
-            return True
-        if int(number_1[index]) == int(number_2[index]):
-            continue
-        return int(number_1[index]) > int(number_2[index])
-    return len(number_1) < len(number_2)
+    return int(number_1 + number_2) > int(number_2 + number_1)
 
 
 def insertion_sort_by_comparator(array, less):
