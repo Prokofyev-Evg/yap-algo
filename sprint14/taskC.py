@@ -2,11 +2,10 @@ import sys
 
 
 def is_substring(sub_str, str):
-    s, ss = 0, 0
-    while s < len(str):
+    ss = 0
+    for s in range(len(str)):
         if ss < len(sub_str) and str[s] == sub_str[ss]:
             ss += 1
-        s += 1
     return len(sub_str) == ss
 
 
