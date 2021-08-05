@@ -1,4 +1,4 @@
-# ID правильного решения 52288917
+# ID правильного решения 52295335
 
 def binary_search_in_shifted_array(arr, left, right, value):
     mid = (left + right) // 2
@@ -11,8 +11,8 @@ def binary_search_in_shifted_array(arr, left, right, value):
 
 
 def narrow_boundaries(arr, left, right, value, mid):
-    if arr[0] < arr[mid]:
-        if arr[0] <= value < arr[mid]:
+    if arr[left] < arr[mid]:
+        if arr[left] <= value < arr[mid]:
             right = mid - 1
         else:
             left = mid + 1

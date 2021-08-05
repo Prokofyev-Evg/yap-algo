@@ -1,4 +1,4 @@
-import random
+# ID правильного решения 52295517
 import sys
 
 
@@ -8,48 +8,44 @@ class Participant:
         self.points = points
         self.falls = falls
 
+    def __le__(self, other):
+        if self.points != other.points:
+            return self.points > other.points
+        if self.falls != other.falls:
+            return self.falls < other.falls
+        return self.name <= other.name
 
-def first_participant_is_higher(first, second):
-    if first.points == second.points:
-        if first.falls == second.falls:
-            return first.name < second.name
-        else:
-            return first.falls < second.falls
-    else:
-        return first.points > second.points
-
-
-def in_place_quick_sort(arr, left, right, comparator):
-    if left >= right - 1:
-        return
-    index = partition(arr, left, right, comparator)
-    in_place_quick_sort(arr, left, index, comparator)
-    in_place_quick_sort(arr, index, right, comparator)
+    def __repr__(self):
+        return self.name
 
 
-def partition(arr, left_index, right_index, comparator):
-    pivot = random.choice(arr[left_index:right_index])
-    while left_index < right_index:
-        if comparator(arr[left_index], pivot):
-            left_index += 1
-        elif not comparator(arr[right_index-1], pivot):
-            right_index -= 1
-        else:
-            arr[left_index], arr[right_index -
-                                 1] = arr[right_index-1], arr[left_index]
-    return right_index
+def in_place_quick_sort(arr, left, right):
+    if left < right:
+        index = partition(arr, left, right)
+        in_place_quick_sort(arr, left, index-1)
+        in_place_quick_sort(arr, index+1, right)
+
+
+def partition(arr, left, right):
+    pivot = arr[right]
+    less_pivot_idx = left - 1
+    for idx in range(left, right+1):
+        if arr[idx] <= pivot:
+            less_pivot_idx += 1
+            arr[idx], arr[less_pivot_idx] = arr[less_pivot_idx], arr[idx]
+    return less_pivot_idx
 
 
 def main():
     qty = int(input())
-    participants = [None] * qty
+    participants = []
     for i in range(qty):
         in_data = sys.stdin.readline().rstrip().split()
-        participants[i] = Participant(name=in_data[0],
-                                      points=int(in_data[1]),
-                                      falls=int(in_data[2]))
-    in_place_quick_sort(participants, 0, qty, first_participant_is_higher)
-    print('\n'.join([x.name for x in participants]))
+        participants.append(Participant(name=in_data[0],
+                                        points=int(in_data[1]),
+                                        falls=int(in_data[2])))
+    in_place_quick_sort(participants, 0, qty-1)
+    [print(participant) for participant in participants]
 
 
 if __name__ == '__main__':
