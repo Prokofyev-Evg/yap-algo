@@ -1,4 +1,4 @@
-# ID правильного решения 52295517
+# ID правильного решения 52299032
 import sys
 
 
@@ -45,7 +45,7 @@ def main():
                                         points=int(in_data[1]),
                                         falls=int(in_data[2])))
     in_place_quick_sort(participants, 0, qty-1)
-    [print(participant) for participant in participants]
+    print(*participants, sep='\n')
 
 
 if __name__ == '__main__':
